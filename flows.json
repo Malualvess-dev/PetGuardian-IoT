@@ -1,0 +1,392 @@
+[
+    {
+        "id": "a0b2696f5e67b0f2",
+        "type": "ui_text",
+        "z": "945ec5b7241dcc41",
+        "group": "131ed10b1692468c",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Staus do Pet",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 290,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "84f581f8de3e617d",
+        "type": "ui_gauge",
+        "z": "945ec5b7241dcc41",
+        "name": "",
+        "group": "131ed10b1692468c",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Bateria",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 260,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "54719e1afa367399",
+        "type": "ui_gauge",
+        "z": "945ec5b7241dcc41",
+        "name": "",
+        "group": "131ed10b1692468c",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperatura",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1170,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "a6091aee59ed5a42",
+        "type": "ui_chart",
+        "z": "945ec5b7241dcc41",
+        "name": "",
+        "group": "131ed10b1692468c",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "Grafico Temperatura",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1200,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2981ee0786d1df96",
+        "type": "inject",
+        "z": "945ec5b7241dcc41",
+        "name": "Status",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "AREA SEGURA",
+        "payloadType": "str",
+        "x": 110,
+        "y": 80,
+        "wires": [
+            [
+                "a0b2696f5e67b0f2"
+            ]
+        ]
+    },
+    {
+        "id": "1486333092ea7e0d",
+        "type": "inject",
+        "z": "945ec5b7241dcc41",
+        "name": "Bateria",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "85",
+        "payloadType": "num",
+        "x": 110,
+        "y": 200,
+        "wires": [
+            [
+                "84f581f8de3e617d"
+            ]
+        ]
+    },
+    {
+        "id": "332b18dbca1976ad",
+        "type": "inject",
+        "z": "945ec5b7241dcc41",
+        "name": "Temperatura",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "38",
+        "payloadType": "num",
+        "x": 850,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6db9ff3630ea6336",
+        "type": "mqtt in",
+        "z": "945ec5b7241dcc41",
+        "name": "MQTT Status",
+        "topic": "petguardian/status",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "5d37cbbd98ad04a6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 90,
+        "y": 40,
+        "wires": [
+            [
+                "a0b2696f5e67b0f2"
+            ]
+        ]
+    },
+    {
+        "id": "1c9218b2805974e6",
+        "type": "mqtt in",
+        "z": "945ec5b7241dcc41",
+        "name": "MQTT Temperatura",
+        "topic": "petguardian/temperatura",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "17860bd7201a8f2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 970,
+        "y": 160,
+        "wires": [
+            [
+                "54719e1afa367399",
+                "a6091aee59ed5a42"
+            ]
+        ]
+    },
+    {
+        "id": "444c1cd2885059d1",
+        "type": "mqtt in",
+        "z": "945ec5b7241dcc41",
+        "name": "MQTT Bateria",
+        "topic": "petguardian/bateria",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "be5019bcf0dc6a05",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 90,
+        "y": 160,
+        "wires": [
+            [
+                "84f581f8de3e617d"
+            ]
+        ]
+    },
+    {
+        "id": "131ed10b1692468c",
+        "type": "ui_group",
+        "name": "Monitoramento",
+        "tab": "1f6e492c5b9c51dd",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "5d37cbbd98ad04a6",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "17860bd7201a8f2e",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "be5019bcf0dc6a05",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "1f6e492c5b9c51dd",
+        "type": "ui_tab",
+        "name": "PetGuardian",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "6d9865b43e727d6f",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
